@@ -1,0 +1,15 @@
+{# needs thing:obj, property:obj, linkify:bool #}
+
+<td>
+	{% if attribute(thing, property.name) is defined %}
+		{% if linkify %}
+			<a href="{{ path("thing_show", { "id": thing.id }) }}">
+				{{ attribute(thing, property.name) }}
+			</a>
+		{% else %}
+			{{ attribute(thing, property.name) }}
+		{% endif %}
+	{% else %}
+		-
+	{% endif %}
+</td>

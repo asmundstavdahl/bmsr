@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Viser ting av typen &apos;{{ type.name }}&apos;</h1>
+	<p>
+		Navn: {{ type.name }}
+	</p>
+	<p>
+		Antall: {{ type.count }}
+	</p>
+	<table>
+		<tr>
+			{% for property in properties %}
+			<th>{{ property.name }}</th>
+			{% endfor %}
+		</tr>
+		{% for thing in things %}
+			{% set linkify = true %}
+		<tr>
+			{% for property in properties %}
+				{% include("type/thing_property_cell.html.twig") %}
+				{% set linkify = false %}
+			{% endfor %}
+		</tr>
+		{% endfor %}
+	</table>
+{% endblock %}
