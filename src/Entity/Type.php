@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,21 +19,23 @@ class Type
      * @ORM\Column(type="text")
      */
     private $name;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Thing", mappedBy="type")
+     *
      * @var Thing[]
      */
     private $things = null;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Property", mappedBy="type")
+     *
      * @var Property[]
      */
     private $properties;
-    
+
     /**
-     * @return Property 
+     * @return Property
      */
     public function getProperties()
     {
@@ -42,7 +43,7 @@ class Type
     }
 
     /**
-     * @param Property[]  $properties
+     * @param Property[] $properties
      */
     public function setProperties($properties)
     {
@@ -50,7 +51,7 @@ class Type
     }
 
     /**
-     * @return Thing[] 
+     * @return Thing[]
      */
     public function getThings()
     {
@@ -58,13 +59,13 @@ class Type
     }
 
     /**
-     * @param Thing  $things
+     * @param Thing $things
      */
     public function setThings($things)
     {
         $this->things = $things;
     }
-    
+
     public function getId()
     {
         return $this->id;
@@ -79,15 +80,14 @@ class Type
     {
         $this->name = $name;
     }
-    
+
     /**
-     * Count the number of things of this Type
+     * Count the number of things of this Type.
+     *
      * @return number
      */
     public function getCount()
     {
         return count($this->getThings());
     }
-    
-    
 }

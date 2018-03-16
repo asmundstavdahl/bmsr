@@ -20,10 +20,11 @@ class Thing
      * @ORM\ManyToOne(targetEntity="App\Entity\Type", inversedBy="things")
      */
     private $type;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="ThingValue", mappedBy="thing")
-     * @var ThingValue[] $thingValues
+     *
+     * @var ThingValue[]
      */
     private $thingValues;
 
@@ -45,21 +46,21 @@ class Thing
 
     public function getId()
     {
-    	return $this->id;
+        return $this->id;
     }
 
     public function getType()
     {
-    	return $this->type;
+        return $this->type;
     }
 
     public function setType($type)
     {
-    	return $this->type = $type;
+        return $this->type = $type;
     }
 
     public function getTitle()
     {
-    	return $this->name ?? $this->id;
+        return $this->name ?? $this->id;
     }
 }

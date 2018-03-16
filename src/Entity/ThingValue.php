@@ -13,30 +13,34 @@ class ThingValue
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @var integer $id
+     *
+     * @var int
      */
     private $id;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Property")
-     * @var Property $property
+     *
+     * @var Property
      */
     private $property;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Thing", inversedBy="thingValues")
-     * @var Thing $thing
+     *
+     * @var Thing
      */
     private $thing;
-    
+
     /**
      * @ORM\Column(type="text")
-     * @var string $value
+     *
+     * @var string
      */
     private $value;
-    
+
     /**
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -90,7 +94,4 @@ class ThingValue
     {
         $this->value = $value;
     }
-
-
-    
 }

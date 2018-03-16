@@ -18,29 +18,33 @@ class Property
 
     /**
      * @ORM\Column(type="text")
+     *
      * @var string
      */
     private $name;
-    
+
     /**
      * @ORM\Column(type="text")
+     *
      * @var string
      */
     private $default_value;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Type", inversedBy="properties")
+     *
      * @var Type
      */
     private $type;
-    
+
     /**
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @var integer
+     *
+     * @var int
      */
     private $sortnum;
-    
+
     /**
      * @return mixed
      */
@@ -106,13 +110,10 @@ class Property
     }
 
     /**
-     * @param integer $sortnum
+     * @param int $sortnum
      */
     public function setSortnum($sortnum)
     {
         $this->sortnum = $sortnum;
     }
-
-    
-    
 }

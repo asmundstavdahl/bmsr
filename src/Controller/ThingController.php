@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use App\Entity\Thing;
 use App\Entity\Type;
 
@@ -19,22 +18,22 @@ class ThingController extends Controller
             'controller_name' => 'ThingController',
         ]);
     }
+
     /**
      * @Route("/thing/{id}", name="thing_show")
      */
     public function show(Thing $thing)
     {
-    	$entityManager = $this->getDoctrine()->getManager();
-    	$typeRepository = $entityManager->getRepository(Type::class);
-    	$type = $typeRepository->find($thing->getId());
+        $entityManager = $this->getDoctrine()->getManager();
+        $typeRepository = $entityManager->getRepository(Type::class);
+        $type = $typeRepository->find($thing->getId());
 
-    	$properties = [];
+        $properties = [];
 
         return $this->render('thing/show.html.twig', [
-            "thing" => $thing,
-            "type" => $type,
-            "properties" => $properties,
+            'thing' => $thing,
+            'type' => $type,
+            'properties' => $properties,
         ]);
     }
-
 }
