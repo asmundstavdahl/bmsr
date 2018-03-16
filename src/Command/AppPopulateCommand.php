@@ -37,6 +37,7 @@ class AppPopulateCommand extends ContainerAwareCommand
          * @var \Doctrine\Common\Persistence\ManagerRegistry $doctrine
          */
         $doctrine = $this->getContainer()->get("doctrine");
+        $lipsum = new \App\Service\LipsumGenerator();
         
         $typeMgr = $doctrine->getManagerForClass(Type::class);
         $propertyMgr = $doctrine->getManagerForClass(Property::class);
@@ -46,16 +47,18 @@ class AppPopulateCommand extends ContainerAwareCommand
         for($i = 1; $i <= $amount; $i++){
             $type = new Type();
             
-            $type->setName("Type nr {$i}");
+            $type->setName("ty_".$lipsum->word());
             
             $properties = [];
             for($j = 1; $j <= $amount; $j++){
                 $property = new Property();
                 
+                $nameLipsum = $lipsum->word();
+                
                 $property->setType($type);
-                $property->setName("{$type->getName()}'s #{$j} prop");
+                $property->setName("pr_{$nameLipsum}");
                 $property->setSortnum($j);
-                $property->setDefaultValue("default of Type{$i}:Prop{$j}");
+                $property->setDefaultValue("default {$nameLipsum}");
                 
                 $propertyMgr->persist($property);
                 
@@ -72,7 +75,7 @@ class AppPopulateCommand extends ContainerAwareCommand
                     
                     $thingValue->setProperty($property);
                     $thingValue->setThing($thing);
-                    $thingValue->setValue($type->getName()."#{$i}'s ".$property->getName());
+                    $thingValue->setValue($lipsum->word());
                     
                     $thingValueMgr->persist($thingValue);
                     
