@@ -44,23 +44,47 @@ class Thing
         $this->thingValues = $thingValues;
     }
 
+    /**
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @return \App\Entity\Type
+     */
     public function getType()
     {
         return $this->type;
     }
 
+    /**
+     * $param \App\Entity\Type $type.
+     */
     public function setType($type)
     {
-        return $this->type = $type;
+        $this->type = $type;
     }
 
-    public function getTitle()
+    /**
+     * @return string
+     */
+    public function getName()
     {
-        return $this->name ?? $this->id;
+        $typeProperties = $this->getType()->getProperties();
+
+        if (0 == count($typeProperties)) {
+            return $this->getType()->getName().'#'.$this->getId();
+        } else {
+            foreach ($this->getThingValues() as $thingValue) {
+                if ($thingValue->getProperty() == $typeProperties[0]) {
+                    return $thingValue->getValue();
+                }
+            }
+
+            return 'Something (could not resolve name)';
+        }
     }
 }

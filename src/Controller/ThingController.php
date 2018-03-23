@@ -5,7 +5,6 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Thing;
-use App\Entity\Type;
 
 class ThingController extends Controller
 {
@@ -24,16 +23,28 @@ class ThingController extends Controller
      */
     public function show(Thing $thing)
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $typeRepository = $entityManager->getRepository(Type::class);
-        $type = $typeRepository->find($thing->getId());
+        $keyValuePairs = [];
 
-        $properties = [];
+        foreach ($thing->getType()->getProperties() as $property) {
+            $keyValuePairs[$property->getName()] = [
+                'key' => $property->getName(),
+                'value' => $property->getDefaultValue(),
+                'sortnum' => $property->getSortnum(),
+                'defaulted' => true,
+            ];
+        }
+        foreach ($thing->getThingValues() as $thingValue) {
+            $keyValuePairs[$thingValue->getProperty()->getName()] = [
+                'key' => $thingValue->getProperty()->getName(),
+                'value' => $thingValue->getValue(),
+                'sortnum' => $thingValue->getProperty()->getSortnum(),
+                'defaulted' => false,
+            ];
+        }
 
         return $this->render('thing/show.html.twig', [
             'thing' => $thing,
-            'type' => $type,
-            'properties' => $properties,
+            'keyValuePairs' => $keyValuePairs,
         ]);
     }
 }

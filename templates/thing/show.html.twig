@@ -2,29 +2,35 @@
 
 {% block body %}
 	<h1>
-		{{ thing.title }}
+		{{ thing.name }}
 	</h1>
 	<h2>
-		<a href="{{ path("type_show", { "type_id": type.id}) }}">{{ type.name }}</a>#{{ thing.id }}
+		<a href="{{ path("type_show", { "id": thing.type.id}) }}">{{ thing.type.name }}</a>#{{ thing.type.id }}
 	</h2>
 	<p>
-		Navn: {{ type.name }}
+		Navn: {{ thing.name }}
 	</p>
 	<p>
 		{#Antall: {{ type.count }}#}
 	</p>
 	<table>
-	{% for property in properties %}
+	{% for kv in keyValuePairs %}
 		<tr>
-			<th>{{ property.name }}</th>
-			<td>
-			{% if attribute(thing, property.name) is defined %}
-				{{ attribute(thing, property.name) }}
+			<th>{{ kv.key }}</th>
+			{% if kv.defaulted %}
+			<td><i>{{ kv.value }}</i></td>
 			{% else %}
-				<i>-</i>
+			<td>{{ kv.value }}</td>
 			{% endif %}
-			</td>
 		</tr>
 	{% endfor %}
 	</table>
+{% endblock %}
+
+{% block hotkeys %}
+<script>
+hotkeyOn("e", function(){
+	location.href = location
+})
+</script>
 {% endblock %}

@@ -2,9 +2,7 @@
 
 {% block body %}
 <h1>
-	Viser ting av typen &apos;
-	{{ type.name }}
-	&apos;
+	Viser ting av typen &apos;{{ type.name }}&apos;
 </h1>
 <p>
 	Navn:
@@ -16,7 +14,7 @@
 </p>
 <table>
 	<tr>
-		<th></th>
+		<th>#</th>
 		{% for property in properties %}
 		<th>{{ property.name }}</th>
 		{% endfor %}

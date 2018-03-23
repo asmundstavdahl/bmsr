@@ -35,7 +35,7 @@ class Type
     private $properties;
 
     /**
-     * @return Property
+     * @return Property[]
      */
     public function getProperties()
     {
