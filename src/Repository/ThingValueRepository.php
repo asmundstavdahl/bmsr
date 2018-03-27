@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Entity\Property;
+use App\Entity\Thing;
 use App\Entity\ThingValue;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -19,16 +21,15 @@ class ThingValueRepository extends ServiceEntityRepository
         parent::__construct($registry, ThingValue::class);
     }
 
-    /*
-    public function findBySomething($value)
+    public function findByThing(Thing $thing)
     {
         return $this->createQueryBuilder('t')
-            ->where('t.something = :value')->setParameter('value', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
+            ->where('t.thing = :thing')->setParameter('thing', $thing)
+            ->leftJoin(Property::class, 'p')
+            ->orderBy('p.sortnum', 'ASC')
+            #->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 }

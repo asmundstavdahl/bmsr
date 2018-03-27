@@ -4,10 +4,7 @@
         <meta charset="UTF-8">
         <title>{% block title %}BMSR{% endblock %}</title>
 
-	<style>
-	    .page-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-	    .page-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-	</style>
+		<link rel="stylesheet" href="{{ asset("build/css/sakura.css") }}">
 
         {% block stylesheets %}{% endblock %}
     </head>
@@ -16,5 +13,42 @@
         	{% block body %}{% endblock %}
         </div>
         {% block javascripts %}{% endblock %}
+        
+<!-- START Hotkeys -->
+        <script type="text/javascript">
+        window.standardHotkeyProcs = {}
+
+        /**
+         * Activate a registered hotkey on specified key combination.
+         * 
+         * @usage useHotkey("Alt+Enter", "edit")
+         * @usage useHotkey("Alt+Ctrl+Shift", e => alert(e.key))
+         */
+        function useHotkey(keyCombo, proc){
+            if(typeof proc !== "function"){
+                proc = standardHotkeyProcs[proc]
+            }
+            str = "hotkey_" + keyCombo
+            window[str.toLowerCase()] = proc
+        }
+        window.standardHotkeyProcs.edit = function(){
+        	location.hash = ""
+        	location.pathname = location.pathname + "/edit"
+        }
+        window.standardHotkeyProcs.submit = function(){
+            document.querySelector("[type=submit]").click()
+        }
+        let hk = `{% block hotkeys %}{% endblock %}`
+        hk.split("\n").forEach(l => {
+            let hotkeyId = "hotkey_" + l.split(/\s+/)[0].toLowerCase()
+            let procName = l.split(/\s+/)[1]
+            let proc = standardHotkeyProcs[procName]
+            console.log(hotkeyId, procName, proc)
+            window[hotkeyId] = proc
+        })
+        </script>
+<!-- END Hotkeys -->
+
+        <script type="text/javascript" src="{{ asset("build/js/shortcuts.js") }}"></script>
     </body>
 </html>
