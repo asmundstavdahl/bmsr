@@ -6,6 +6,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Thing;
 use App\Form\ThingType;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\PersistentCollection;
+use App\Entity\ThingValue;
 
 class ThingController extends Controller
 {
@@ -52,28 +55,30 @@ class ThingController extends Controller
     /**
      * @Route("/thing/{id}/edit", name="thing_edit")
      */
-    public function edit(Thing $thing)
+    public function edit(Thing $thing, Request $request)
     {
-        $keyValuePairs = [];
-        
-        foreach ($thing->getType()->getProperties() as $property) {
-            $keyValuePairs[$property->getName()] = [
-                'key' => $property->getName(),
-                'value' => $property->getDefaultValue(),
-                'sortnum' => $property->getSortnum(),
-                'defaulted' => true,
-            ];
-        }
-        foreach ($thing->getThingValues() as $thingValue) {
-            $keyValuePairs[$thingValue->getProperty()->getName()] = [
-                'key' => $thingValue->getProperty()->getName(),
-                'value' => $thingValue->getValue(),
-                'sortnum' => $thingValue->getProperty()->getSortnum(),
-                'defaulted' => false,
-            ];
-        }
-        
         $form = $this->createForm(ThingType::class, $thing);
+        
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            
+            // ... maybe do some form processing, like saving the Task and Tag objects
+            dump(func_get_args());
+            dump($form->getData());
+            /**
+             * @var ThingValue[] $submittedThingValues
+             */
+            $submittedThingValues = $form->getData()->getThingValues();
+            foreach($submittedThingValues as $thingValue) {
+                $entityManager->persist($thingValue);
+            }
+            $entityManager->persist($thing);
+            $entityManager->flush();
+            
+            return $this->redirectToRoute("thing_show", ["id" => $thing->getId()]);
+        }
         
         return $this->render('thing/edit.html.twig', [
             'thing' => $thing,

@@ -24,4 +24,18 @@
 
 {% block hotkeys %}
 Ctrl+Enter submit
+Escape     cancel
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+window.hotkeyCancelQueue.push(e => {
+	if(confirm("Forkast endringer og gå tilbake til visning?")){
+		window.standardHotkeyProcs.up(e)
+    	e.preventDefault()
+	} else {
+		return false
+	}
+})
+</script> 
 {% endblock %}

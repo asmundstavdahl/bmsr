@@ -26,3 +26,16 @@
 	{% endfor %}
 	</table>
 {% endblock %}
+
+{% block hotkeys %}
+e       edit
+Escape  cancel
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+window.hotkey_t = e => {
+	location.href = "{{ path("type_show", {id: thing.type.id}) }}"
+}
+</script>
+{% endblock %}

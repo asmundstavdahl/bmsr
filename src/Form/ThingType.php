@@ -43,16 +43,10 @@ class ThingType extends AbstractType
         
         $thingValues = $this->thingValueRepository->findByThing($thing);
 
-        #foreach($thingValues as $thingValue){
-            $builder
-                ->add("thingValues", CollectionType::class, [
-                    "entry_type" => ThingValueType::class,
-                    "entry_options" => [
-                        #"data" => $thingValues,
-                    ],
-                ])
-            ;
-        #}
+        $builder->add("thingValues", CollectionType::class, [
+                "entry_type" => ThingValueType::class,
+            ]
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)

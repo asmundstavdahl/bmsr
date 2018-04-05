@@ -1,0 +1,54 @@
+<!-- START Hotkeys -->
+<script type="text/javascript">
+window.standardHotkeyProcs = {}
+
+/**
+ * Activate a registered hotkey on specified key combination.
+ * 
+ * @usage useHotkey("Alt+Enter", "edit")
+ * @usage useHotkey("Alt+Ctrl+Shift", e => alert(e.key))
+ */
+function useHotkey(keyCombo, proc){
+    if(typeof proc !== "function"){
+        proc = standardHotkeyProcs[proc]
+    }
+    str = "hotkey_" + keyCombo
+    window[str.toLowerCase()] = proc
+}
+window.standardHotkeyProcs.edit = function(){
+	location.hash = ""
+	location.pathname = location.pathname + "/edit"
+}
+window.standardHotkeyProcs.submit = function(){
+    document.querySelector("[type=submit]").click()
+}
+window.hotkeyCancelQueue = []
+window.standardHotkeyProcs.cancel = function(e){
+    let proc = window.hotkeyCancelQueue.pop()
+    if(typeof proc === "function"){
+    	let result = proc(e)
+    	if(result === false){
+    		window.hotkeyCancelQueue.push(proc)
+    	}
+    }
+}
+window.standardHotkeyProcs.filter = function(){
+    let filterElement = document.querySelector("#filter")
+    filterElement.classList.add("active")
+    window.hotkeyCancelQueue.push(_ => { filterElement.classList.remove("active") })
+}
+window.standardHotkeyProcs.up = function(){
+	let newHref = location.href
+    	.replace(location.hash, "")
+    	.replace(/\/[^/]*$/, "")
+	location.href = newHref
+}
+window.hotkeyBindings.split("\n").forEach(l => {
+    let hotkeyId = "hotkey_" + l.split(/\s+/)[0].toLowerCase()
+    let procName = l.split(/\s+/)[1]
+    let proc = standardHotkeyProcs[procName]
+    console.log(hotkeyId, procName, proc)
+    window[hotkeyId] = proc
+})
+</script>
+<!-- END Hotkeys -->

@@ -33,6 +33,27 @@ class Thing
      */
     public function getThingValues()
     {
+        $thingValues = $this->thingValues;
+        
+        $properties = $this->getType()->getProperties();
+        
+        foreach ($properties as $property) {
+            $foundThingValueForProperty = false;
+            foreach ($thingValues as $thingValue) {
+                if ($thingValue->getProperty() == $property) {
+                    $foundThingValueForProperty = true;
+                    break;
+                }
+            }
+            if (!$foundThingValueForProperty) {
+                $thingValueForThisProperty = new ThingValue();
+                $thingValueForThisProperty->setProperty($property);
+                $thingValueForThisProperty->setThing($this);
+                $thingValueForThisProperty->setValue($property->getDefaultValue());
+                $this->thingValues[] = $thingValueForThisProperty;
+            }
+        }
+        
         return $this->thingValues;
     }
 
