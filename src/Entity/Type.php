@@ -25,7 +25,7 @@ class Type
      *
      * @var Thing[]
      */
-    private $things = null;
+    private $things;
 
     /**
      * @ORM\OneToMany(targetEntity="Property", mappedBy="type")
