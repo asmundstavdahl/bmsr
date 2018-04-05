@@ -27,7 +27,7 @@ class ThingValueRepository extends ServiceEntityRepository
             ->where('t.thing = :thing')->setParameter('thing', $thing)
             ->leftJoin(Property::class, 'p')
             ->orderBy('p.sortnum', 'ASC')
-            #->setMaxResults(10)
+            //->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;

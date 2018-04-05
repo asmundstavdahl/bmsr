@@ -3,12 +3,13 @@
 namespace App\Form;
 
 use App\Entity\Property;
-use App\Entity\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class PropertyType extends AbstractType
 {
@@ -16,11 +17,7 @@ class PropertyType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('default_value', TextType::class)
-            ->add('type', EntityType::class, [
-                "class" => Type::class,
-                "choice_label" => "name",
-            ])
+            ->add('default_value', TextareaType::class)
         ;
     }
 
@@ -29,5 +26,17 @@ class PropertyType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Property::class,
         ]);
+    }
+
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        /**
+         * @var ThingValue
+         */
+        $property = $form->getData();
+
+        $label = $property->getName();
+
+        $view->vars['label'] = $label;
     }
 }

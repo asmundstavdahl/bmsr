@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>
+		<i>edit</i> {{ type.name }}
+	</h1>
+	<h2>
+		<a href="{{ path("type_show", { "id": type.id}) }}">{{ type.name }}</a>#{{ type.id }}
+	</h2>
+	
+	<div>
+	{{ form_start(form) }}
+	    {{ form_row(form.name) }}
+	    
+	    <div class="row">
+    		<div class="four columns"><h3>Navn på egenskap</h3></div>
+    		<div class="eight columns"><h3>Standardverdi</h3></div>
+		</div>
+	    {% for property in form.properties %}
+		    <div class="row">
+                {{ form_label(property) }}
+		    	<div class="row twelve columns">
+		    		<div class="four columns">
+                        {{ form_widget(property.name) }}
+                    </div>
+		    		<div class="eight columns">
+                        {{ form_widget(property.default_value) }}
+                    </div>
+                </div>
+                {{ form_errors(property) }}
+            </div>
+		{% endfor %}
+		
+		<input type="submit">
+	{{ form_end(form) }}
+	</div>
+{% endblock %}
+
+{% block hotkeys %}
+Ctrl+Enter submit
+Escape     cancel
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+window.hotkeyCancelQueue.push(e => {
+	if(confirm("Forkast endringer og gå tilbake til visning?")){
+		window.standardHotkeyProcs.up(e)
+    	e.preventDefault()
+	} else {
+		return false
+	}
+})
+</script> 
+{% endblock %}

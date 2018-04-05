@@ -34,9 +34,9 @@ class Thing
     public function getThingValues()
     {
         $thingValues = $this->thingValues;
-        
+
         $properties = $this->getType()->getProperties();
-        
+
         foreach ($properties as $property) {
             $foundThingValueForProperty = false;
             foreach ($thingValues as $thingValue) {
@@ -53,7 +53,7 @@ class Thing
                 $this->thingValues[] = $thingValueForThisProperty;
             }
         }
-        
+
         return $this->thingValues;
     }
 
