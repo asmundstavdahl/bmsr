@@ -4,12 +4,14 @@
         <meta charset="UTF-8">
         <title>{% block title %}BMSR{% endblock %}</title>
 
-		<link rel="stylesheet" href="{{ asset("build/css/sakura.css") }}">
+		<!-- <link rel="stylesheet" href="{{ asset("build/css/sakura.css") }}"> -->
+		<link rel="stylesheet" href="{{ asset("build/css/normalize.css") }}">
+		<link rel="stylesheet" href="{{ asset("build/css/skeleton.css") }}">
 
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-    	<div class="page-wrapper">
+    	<div class="page-wrapper container">
         	{% block body %}{% endblock %}
         </div>
         {% block javascripts %}{% endblock %}

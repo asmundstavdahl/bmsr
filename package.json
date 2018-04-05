@@ -10,5 +10,8 @@
         "watch": "encore dev --watch",
         "build": "encore production",
         "cs": "./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix src/ -vv"
+    },
+    "dependencies": {
+        "Skeleton": "https://github.com/dhg/Skeleton.git#2.0.4"
     }
 }
