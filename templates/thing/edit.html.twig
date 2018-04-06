@@ -1,25 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<h1>
-		<i>edit</i> {{ thing.name }}
-	</h1>
-	<h2>
-		<a href="{{ path("type_show", { "id": thing.type.id}) }}">{{ thing.type.name }}</a>#{{ thing.type.id }}
-	</h2>
-	<p>
-		Navn: {{ thing.name }}
-	</p>
-	
-	<div>
-	{{ form_start(form) }}
-	    {{ form_row(form.type) }}
-	    
-		{{ form_row(form.thingValues) }}
-		
-		<input type="submit">
-	{{ form_end(form) }}
-	</div>
+    <h1>
+        <i>edit</i> {{ thing.name }}
+    </h1>
+    <h2>
+        <a href="{{ path("type_show", { "id": thing.type.id}) }}">{{ thing.type.name }}</a>#{{ thing.type.id }}
+    </h2>
+    <p>
+        Navn: {{ thing.name }}
+    </p>
+    
+    <div>
+    {{ form_start(form) }}
+        {{ form_row(form.type) }}
+        
+        {{ form_row(form.thingValues) }}
+        
+        <input type="submit">
+    {{ form_end(form) }}
+    </div>
 {% endblock %}
 
 {% block hotkeys %}
@@ -30,12 +30,12 @@ Escape     cancel
 {% block js %}
 <script type="text/javascript">
 window.hotkeyCancelQueue.push(e => {
-	if(confirm("Forkast endringer og gå tilbake til visning?")){
-		window.standardHotkeyProcs.up(e)
-    	e.preventDefault()
-	} else {
-		return false
-	}
+    if(confirm("Forkast endringer og gå tilbake til visning?")){
+        window.standardHotkeyProcs.up(e)
+        e.preventDefault()
+    } else {
+        return false
+    }
 })
 </script> 
 {% endblock %}

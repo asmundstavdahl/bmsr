@@ -2,8 +2,8 @@
 <script type="text/javascript">
 window.standardHotkeyProcs = {
     edit: function(){
-    	location.hash = ""
-    	location.pathname = location.pathname + "/edit"
+        location.hash = ""
+        location.pathname = location.pathname + "/edit"
     },
     submit: function(){
         document.querySelector("[type=submit]").click() 
@@ -11,10 +11,10 @@ window.standardHotkeyProcs = {
     cancel: function(e){
         let proc = window.hotkeyCancelQueue.pop()
         if(typeof proc === "function"){
-        	let result = proc(e)
-        	if(result === false){
-        		window.hotkeyCancelQueue.push(proc)
-        	}
+            let result = proc(e)
+            if(result === false){
+                window.hotkeyCancelQueue.push(proc)
+            }
         }
     },
     filter: function(){
@@ -23,18 +23,18 @@ window.standardHotkeyProcs = {
         window.hotkeyCancelQueue.push(_ => { filterElement.classList.remove("active") })
     },
     up: function(){
-    	if(window.hotkeyUpUrl){
-    		location.href = window.hotkeyUpUrl
-    	} else {
-    		location.href = location.href
-            	.replace(location.hash, "")
-            	.replace(/\/[^/]*$/, "")
-    	}
+        if(window.hotkeyUpUrl){
+            location.href = window.hotkeyUpUrl
+        } else {
+            location.href = location.href
+                .replace(location.hash, "")
+                .replace(/\/[^/]*$/, "")
+        }
     },
     "new": function(){
-		location.href = location.href
-			.replace(location.hash, "")
-			+ "/new"
+        location.href = location.href
+            .replace(location.hash, "")
+            + "/new"
     }
 }
 window.hotkeyCancelQueue = []
@@ -48,11 +48,11 @@ window.hotkeyBindings.split("\n").forEach(l => {
 })
 
 function hotkey(match, proc){
-	document.body.addEventListener("keypress", e => {
-		if(e.key == match || (match.test && e.key.match(match))){
-			proc(e)
-		}
-	})
+    document.body.addEventListener("keypress", e => {
+        if(e.key == match || (match.test && e.key.match(match))){
+            proc(e)
+        }
+    })
 }
 
 </script>

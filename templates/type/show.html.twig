@@ -2,33 +2,33 @@
 
 {% block body %}
 <h2>
-	Viser ting av typen
+    Viser ting av typen
 </h2>
 <h1>{{ type.name }}</h1>
 <p>
-	Antall:
-	{{ type.count }}
+    Antall:
+    {{ type.count }}
 </p>
 <table>
-	<tr>
-		<th>#</th>
-		{% for property in properties %}
-		<th>{{ property.name }}</th>
-		{% endfor %}
-	</tr>
-	{% for thing in things %}
-	<tr>
-		<td>
-			<a href="{{ path("thing_show", { "id": thing.id }) }}"
-				data-quick-select="{{ thing.id }}">
-			    {{ thing.id }}
-			</a>
-		</td>
-		{% for thingValue in thing.thingValues %}
-		<td>{{ thingValue.value }}</td>
-		{% endfor %}
-	</tr>
-	{% endfor %}
+    <tr>
+        <th>#</th>
+        {% for property in properties %}
+        <th>{{ property.name }}</th>
+        {% endfor %}
+    </tr>
+    {% for thing in things %}
+    <tr>
+        <td>
+            <a href="{{ path("thing_show", { "id": thing.id }) }}"
+                data-quick-select="{{ thing.id }}">
+                {{ thing.id }}
+            </a>
+        </td>
+        {% for thingValue in thing.thingValues %}
+        <td>{{ thingValue.value }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
 </table>
 
 {% include 'quick-select.html.twig' %}
@@ -36,7 +36,7 @@
 {% endblock %}
 
 {% block hotkeys %}
-e      		edit
-f      		filter
+e              edit
+f              filter
 Alt+ArrowUp up
 {% endblock %}

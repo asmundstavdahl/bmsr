@@ -1,41 +1,41 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	{% if type.id %}
-    	<h1>
-    		<i>edit</i> {{ type.name }}
-    	</h1>
-    	<h2>
-    		<a href="{{ path("type_show", { "id": type.id}) }}">{{ type.name }}</a>#{{ type.id }}
-    	</h2>
+    {% if type.id %}
+        <h1>
+            <i>edit</i> {{ type.name }}
+        </h1>
+        <h2>
+            <a href="{{ path("type_show", { "id": type.id}) }}">{{ type.name }}</a>#{{ type.id }}
+        </h2>
     {% else %}
-    	<h1>
-    		<i>new</i> Type
-		</h1>
+        <h1>
+            <i>new</i> Type
+        </h1>
     {% endif %}
-	
-	<div>
-	{{ form_start(form) }}
-	    {{ form_row(form.name) }}
-	    
-	    <div class="row">
-    		<div class="four columns"><h3>Navn på egenskap</h3></div>
-    		<div class="eight columns"><h3>Standardverdi</h3></div>
-		</div>
-		<div>
-    		<div id="propertyContainer"
-    			data-prototype="{{ include('type/_property.html.twig', {'property': form.properties.vars.prototype}) | e('html_attr') }}">
-        	    {% for property in form.properties %}
-        		    {% include "type/_property.html.twig" with {'property': property} %}
-        		{% endfor %}
-    		</div>
-    		
-			<button id="addPropertyButton">Legg til ny egenskap</button>
-		</div>
-		
-		<input type="submit">
-	{{ form_end(form) }}
-	</div>
+    
+    <div>
+    {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        
+        <div class="row">
+            <div class="four columns"><h3>Navn på egenskap</h3></div>
+            <div class="eight columns"><h3>Standardverdi</h3></div>
+        </div>
+        <div>
+            <div id="propertyContainer"
+                data-prototype="{{ include('type/_property.html.twig', {'property': form.properties.vars.prototype}) | e('html_attr') }}">
+                {% for property in form.properties %}
+                    {% include "type/_property.html.twig" with {'property': property} %}
+                {% endfor %}
+            </div>
+            
+            <button id="addPropertyButton">Legg til ny egenskap</button>
+        </div>
+        
+        <input type="submit">
+    {{ form_end(form) }}
+    </div>
 {% endblock %}
 
 {% block hotkeys %}
@@ -50,36 +50,36 @@ let propertyContainer = document.getElementById("propertyContainer")
 let propertyPrototype = propertyContainer.getAttribute("data-prototype")
 
 function addProperty(){
-	let index = propertyContainer.getElementsByTagName("input").length
+    let index = propertyContainer.getElementsByTagName("input").length
 
-	let newProperty = propertyPrototype
-		.replace(/__name__label__/g, `Egenskap #${index + 1}`)
+    let newProperty = propertyPrototype
+        .replace(/__name__label__/g, `Egenskap #${index + 1}`)
         .replace(/__name__/g, index)
-	
-	propertyContainer.innerHTML += newProperty
+    
+    propertyContainer.innerHTML += newProperty
 
-	let inputs = propertyContainer.querySelectorAll("input[type=text]")
-	inputs[inputs.length - 1].focus()
+    let inputs = propertyContainer.querySelectorAll("input[type=text]")
+    inputs[inputs.length - 1].focus()
 }
 
 document.getElementById("addPropertyButton").addEventListener("click", e => {
-	addProperty()
-	e.preventDefault()
+    addProperty()
+    e.preventDefault()
 })
 
 
 window["hotkey_ctrl++"] = e => {
-	addProperty()
-	e.preventDefault()
+    addProperty()
+    e.preventDefault()
 }
 
 window.hotkeyCancelQueue.push(e => {
-	if(confirm("Forkast endringer og gå tilbake til visning?")){
-		window.standardHotkeyProcs.up(e)
-    	e.preventDefault()
-	} else {
-		return false
-	}
+    if(confirm("Forkast endringer og gå tilbake til visning?")){
+        window.standardHotkeyProcs.up(e)
+        e.preventDefault()
+    } else {
+        return false
+    }
 })
 
 </script> 

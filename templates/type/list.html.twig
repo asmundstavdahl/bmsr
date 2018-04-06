@@ -1,23 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<h1>Oversikt over typer ting</h1>
-	<table>
-		<tr>
-			<th>Navn</th>
-			<th>Antall</th>
-		</tr>
-		{% for type in types %}
-		<tr>
-			<td>
-				<a href="{{ path("type_show", {"id": type.id}) }}">
-					{{ type.name }}
-				</a>
-			</td>
-			<td>{{ type.count }}</td>
-		</tr>
-		{% endfor %}
-	</table>
+    <h1>Oversikt over typer ting</h1>
+    <table>
+        <tr>
+            <th>Navn</th>
+            <th>Antall</th>
+        </tr>
+        {% for type in types %}
+        <tr>
+            <td>
+                <a href="{{ path("type_show", {"id": type.id}) }}">
+                    {{ type.name }}
+                </a>
+            </td>
+            <td>{{ type.count }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
 
 {% block hotkeys %}

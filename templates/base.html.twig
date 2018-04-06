@@ -4,24 +4,24 @@
         <meta charset="UTF-8">
         <title>{% block title %}BMSR{% endblock %}</title>
 
-		<!-- <link rel="stylesheet" href="{{ asset("build/css/sakura.css") }}"> -->
-		<link rel="stylesheet" href="{{ asset("build/css/normalize.css") }}">
-		<link rel="stylesheet" href="{{ asset("build/css/skeleton.css") }}">
+        <!-- <link rel="stylesheet" href="{{ asset("build/css/sakura.css") }}"> -->
+        <link rel="stylesheet" href="{{ asset("build/css/normalize.css") }}">
+        <link rel="stylesheet" href="{{ asset("build/css/skeleton.css") }}">
 
         {% block stylesheets %}{% endblock %}
 
         <script type="text/javascript">
         window.hotkeyBindings = `{% block hotkeys %}{% endblock %}`
         </script>
-		{% include 'hotkeys-js.html.twig' %}
+        {% include 'hotkeys-js.html.twig' %}
     </head>
     <body>
-    	<div class="page-wrapper container">
-        	{% block body %}{% endblock %}
+        <div class="page-wrapper container">
+            {% block body %}{% endblock %}
         </div>
         {% block javascripts %}{% endblock %}
 
-		{% block js %}{% endblock %}
+        {% block js %}{% endblock %}
 
         <script type="text/javascript" src="{{ asset("build/js/shortcuts.js") }}"></script>
     </body>

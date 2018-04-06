@@ -1,30 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<h1>
-		{{ thing.name }}
-	</h1>
-	<h2>
-		<a href="{{ path("type_show", { "id": thing.type.id}) }}">{{ thing.type.name }}</a>#{{ thing.type.id }}
-	</h2>
-	<p>
-		Navn: {{ thing.name }}
-	</p>
-	<p>
-		{#Antall: {{ type.count }}#}
-	</p>
-	<table>
-	{% for kv in keyValuePairs %}
-		<tr>
-			<th>{{ kv.key }}</th>
-			{% if kv.defaulted %}
-			<td><i>{{ kv.value }}</i></td>
-			{% else %}
-			<td>{{ kv.value }}</td>
-			{% endif %}
-		</tr>
-	{% endfor %}
-	</table>
+    <h1>
+        {{ thing.name }}
+    </h1>
+    <h2>
+        <a href="{{ path("type_show", { "id": thing.type.id}) }}">{{ thing.type.name }}</a>#{{ thing.type.id }}
+    </h2>
+    <p>
+        Navn: {{ thing.name }}
+    </p>
+    <p>
+        {#Antall: {{ type.count }}#}
+    </p>
+    <table>
+    {% for kv in keyValuePairs %}
+        <tr>
+            <th>{{ kv.key }}</th>
+            {% if kv.defaulted %}
+            <td><i>{{ kv.value }}</i></td>
+            {% else %}
+            <td>{{ kv.value }}</td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </table>
 {% endblock %}
 
 {% block hotkeys %}
