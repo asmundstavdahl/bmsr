@@ -4,9 +4,9 @@
 
 document.body.addEventListener("keypress", function(e) {
     console.log("key:" + e.key, e)
-    
+
     let hotkeyId = e.key
-    
+
     if (e.altKey && e.key != "Alt"){
         hotkeyId = "Alt+" + hotkeyId
     }

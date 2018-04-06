@@ -9,7 +9,8 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production",
-        "cs": "./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix src/ -vv"
+        "cs": "./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix src/ -vv",
+        "space": "find src/ assets/ config/ templates/ tests/ translations/ | xargs file | grep -e text -e yaml | cut -d: -f1 | xargs sed -i -e 's/\t/    /g' -e 's/ *$//g'"
     },
     "dependencies": {
         "Skeleton": "https://github.com/dhg/Skeleton.git#2.0.4"

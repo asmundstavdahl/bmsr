@@ -10,13 +10,13 @@
     <p>
         Navn: {{ thing.name }}
     </p>
-    
+
     <div>
     {{ form_start(form) }}
         {{ form_row(form.type) }}
-        
+
         {{ form_row(form.thingValues) }}
-        
+
         <input type="submit">
     {{ form_end(form) }}
     </div>
@@ -37,5 +37,5 @@ window.hotkeyCancelQueue.push(e => {
         return false
     }
 })
-</script> 
+</script>
 {% endblock %}
