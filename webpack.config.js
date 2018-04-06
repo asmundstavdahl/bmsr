@@ -14,8 +14,11 @@ Encore
     .addEntry('js/shortcuts', './assets/js/shortcuts.js')
     .addEntry('css/sakura', './assets/css/sakura.css')
     // .addStyleEntry('css/app', './assets/css/app.scss')
+    
     .addEntry('css/normalize', './node_modules/Skeleton/css/normalize.css')
     .addEntry('css/skeleton', './node_modules/Skeleton/css/skeleton.css')
+    
+    .addEntry('js/quick-select', './assets/js/quick-select.js')
 
     // uncomment if you use Sass/SCSS files
     // .enableSassLoader()

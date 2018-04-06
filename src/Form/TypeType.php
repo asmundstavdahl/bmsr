@@ -17,6 +17,7 @@ class TypeType extends AbstractType
 
         $builder->add('properties', CollectionType::class, [
             'entry_type' => PropertyType::class,
+            'allow_add' => true,
         ]);
     }
 

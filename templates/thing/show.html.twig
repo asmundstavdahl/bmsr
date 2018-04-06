@@ -28,14 +28,14 @@
 {% endblock %}
 
 {% block hotkeys %}
-e       edit
-Escape  cancel
+e           edit
+Escape      cancel
+Alt+ArrowUp up
+t           up
 {% endblock %}
 
 {% block js %}
 <script type="text/javascript">
-window.hotkey_t = e => {
-	location.href = "{{ path("type_show", {id: thing.type.id}) }}"
-}
+window.hotkeyUpUrl = "{{ path("type_show", {id: thing.type.id}) }}"
 </script>
 {% endblock %}

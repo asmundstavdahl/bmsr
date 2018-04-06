@@ -1,0 +1,12 @@
+<div class="row">
+    {{ form_label(property) }}
+	<div class="row twelve columns">
+		<div class="four columns">
+            {{ form_widget(property.name) }}
+        </div>
+		<div class="eight columns">
+            {{ form_widget(property.default_value) }}
+        </div>
+    </div>
+    {{ form_errors(property) }}
+</div>

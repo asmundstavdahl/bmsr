@@ -31,12 +31,13 @@ class PropertyType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         /**
-         * @var ThingValue
+         * @var ThingValue|null
          */
         $property = $form->getData();
 
-        $label = $property->getName();
-
-        $view->vars['label'] = $label;
+        if ($property) {
+            $label = $property->getName();
+            $view->vars['label'] = $label;
+        }
     }
 }

@@ -68,9 +68,9 @@ class TypeController extends Controller
     }
 
     /**
-     * @Route("/type/new", name="type_new")
+     * @Route("/type/new/{id}", name="type_new")
      */
-    public function new(Request $request)
+    public function new(Type $type, Request $request)
     {
         $type = new Type();
 
@@ -91,7 +91,7 @@ class TypeController extends Controller
             return $this->redirectToRoute('type_list');
         }
 
-        return $this->render('type/new.html.twig', [
+        return $this->render('type/edit.html.twig', [
             'type' => $type,
             'form' => $form->createView(),
         ]);

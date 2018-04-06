@@ -19,7 +19,8 @@
 	{% for thing in things %}
 	<tr>
 		<td>
-			<a href="{{ path("thing_show", { "id": thing.id }) }}">
+			<a href="{{ path("thing_show", { "id": thing.id }) }}"
+				data-quick-select="{{ thing.id }}">
 			    {{ thing.id }}
 			</a>
 		</td>
@@ -29,10 +30,13 @@
 	</tr>
 	{% endfor %}
 </table>
+
+{% include 'quick-select.html.twig' %}
+
 {% endblock %}
 
 {% block hotkeys %}
-e      edit
-Escape cancel
-f      filter
+e      		edit
+f      		filter
+Alt+ArrowUp up
 {% endblock %}
