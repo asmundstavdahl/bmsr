@@ -25,7 +25,7 @@ class TypeController extends Controller
     }
 
     /**
-     * @Route("/type/{id}", name="type_show")
+     * @Route("/type/{id}", name="type_show", requirements={"id"="\d+"})
      */
     public function show(Type $type)
     {
@@ -37,7 +37,7 @@ class TypeController extends Controller
     }
 
     /**
-     * @Route("/type/{id}/edit", name="type_edit")
+     * @Route("/type/{id}/edit", name="type_edit", requirements={"id"="\d+"})
      */
     public function edit(Type $type, Request $request)
     {
@@ -53,6 +53,9 @@ class TypeController extends Controller
              */
             $submittedProperties = $form->getData()->getProperties();
             foreach ($submittedProperties as $property) {
+                $property->setType($type);
+                $property->setDefaultValue("");
+                $property->setSortnum(1);
                 $entityManager->persist($property);
             }
             $entityManager->persist($type);
@@ -68,9 +71,9 @@ class TypeController extends Controller
     }
 
     /**
-     * @Route("/type/new/{id}", name="type_new")
+     * @Route("/type/new", name="type_new")
      */
-    public function new(Type $type, Request $request)
+    public function new(Request $request)
     {
         $type = new Type();
 
@@ -82,6 +85,9 @@ class TypeController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
 
             foreach ($type->getProperties() as $property) {
+                $property->setType($type);
+                $property->setDefaultValue("");
+                $property->setSortnum(1);
                 $entityManager->persist($property);
             }
             $entityManager->persist($type);

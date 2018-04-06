@@ -17,7 +17,9 @@ class PropertyType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('default_value', TextareaType::class)
+            ->add('default_value', TextareaType::class, [
+                "required" => false
+            ])
         ;
     }
 

@@ -55,8 +55,10 @@ function addProperty(){
     let newProperty = propertyPrototype
         .replace(/__name__label__/g, `Egenskap #${index + 1}`)
         .replace(/__name__/g, index)
-
-    propertyContainer.innerHTML += newProperty
+        
+   	let el = document.createElement("div")
+    propertyContainer.appendChild(el)
+   	el.outerHTML = newProperty
 
     let inputs = propertyContainer.querySelectorAll("input[type=text]")
     inputs[inputs.length - 1].focus()
