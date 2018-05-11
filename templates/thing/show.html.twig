@@ -25,6 +25,10 @@
         </tr>
     {% endfor %}
     </table>
+
+    {% for comment in thing.comments %}
+        {% include 'thing_comment.twig.html' %}
+    {% endfor %}
 {% endblock %}
 
 {% block hotkeys %}

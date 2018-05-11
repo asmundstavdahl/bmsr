@@ -29,6 +29,18 @@ class Thing
     private $thingValues;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="thing")
+     *
+     * @var Comment[]
+     */
+    private $comments;
+
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
      * @return \App\Entity\ThingValue[]
      */
     public function getThingValues()

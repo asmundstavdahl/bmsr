@@ -17,6 +17,7 @@ class Version20180316075636 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf('sqlite' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'sqlite\'.');
 
+        $this->addSql('DROP TABLE property');
         $this->addSql('CREATE TABLE property (id INTEGER NOT NULL, type_id INTEGER DEFAULT NULL, name CLOB NOT NULL, value CLOB NOT NULL, sortnum INTEGER NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_8BF21CDEC54C8C93 ON property (type_id)');
         $this->addSql('CREATE TEMPORARY TABLE __temp__thing AS SELECT id, type_id FROM thing');
