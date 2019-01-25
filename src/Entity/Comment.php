@@ -17,8 +17,6 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Thing", inversedBy="comments")
      */
     private $thing;
